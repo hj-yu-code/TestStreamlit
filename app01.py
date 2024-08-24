@@ -1,8 +1,8 @@
+# Uber Taxi Data
 import streamlit as st
 import pandas as pd
 import numpy as np
 
-# Uber Taxi Data
 st.title('Uber pickups in NYC')
 
 DATE_COLUMN = 'date/time'
@@ -31,5 +31,11 @@ data_load_state.text('Loading data...done!')
 st.subheader('Raw data')
 st.write(data)
 
-# REF
-# https://docs.streamlit.io/get-started/tutorials/create-an-app
+# 히스토그램 그리기
+st.subheader('Number of pickups by hour')
+
+hist_values = np.histogram(
+    data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
+
+# print(hist_values)
+st.bar_chart(hist_values)
